@@ -95,85 +95,90 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     color: Color(0xFFFF7043),
                                     borderRadius: BorderRadius.circular(15),
                                   ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(40, 0, 0, 0),
-                                        child: Text(
-                                          getJsonField(
-                                                  containerGetUserInfoResponse,
-                                                  r'$.nickname')
-                                              .toString(),
-                                          textAlign: TextAlign.start,
-                                          style:
-                                              FlutterFlowTheme.title1.override(
-                                            fontFamily: 'Playfair Display',
-                                            color: Colors.white,
-                                            fontSize: 30,
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 1, 0, 0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(40, 0, 0, 0),
+                                          child: Text(
+                                            getJsonField(
+                                                    containerGetUserInfoResponse,
+                                                    r'$.nickname')
+                                                .toString(),
+                                            textAlign: TextAlign.start,
+                                            style: FlutterFlowTheme.title1
+                                                .override(
+                                              fontFamily: 'Playfair Display',
+                                              color: Colors.white,
+                                              fontSize: 30,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment(0.6, 0),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsets.fromLTRB(5, 0, 1, 0),
-                                            child: InkWell(
-                                              onTap: () async {
-                                                final selectedMedia =
-                                                    await selectMedia(
-                                                  maxWidth: 200.00,
-                                                  maxHeight: 200.00,
-                                                );
-                                                if (selectedMedia != null &&
-                                                    validateFileFormat(
-                                                        selectedMedia
-                                                            .storagePath,
-                                                        context)) {
-                                                  showUploadMessage(context,
-                                                      'Uploading file...',
-                                                      showLoading: true);
-                                                  final downloadUrl =
-                                                      await uploadData(
+                                        Expanded(
+                                          child: Align(
+                                            alignment: Alignment(0.6, 0),
+                                            child: Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  5, 0, 1, 0),
+                                              child: InkWell(
+                                                onTap: () async {
+                                                  final selectedMedia =
+                                                      await selectMedia(
+                                                    maxWidth: 200.00,
+                                                    maxHeight: 200.00,
+                                                  );
+                                                  if (selectedMedia != null &&
+                                                      validateFileFormat(
                                                           selectedMedia
                                                               .storagePath,
-                                                          selectedMedia.bytes);
-                                                  ScaffoldMessenger.of(context)
-                                                      .hideCurrentSnackBar();
-                                                  if (downloadUrl != null) {
-                                                    setState(() =>
-                                                        uploadedFileUrl =
-                                                            downloadUrl);
-                                                    showUploadMessage(
-                                                        context, 'Success!');
-                                                  } else {
+                                                          context)) {
                                                     showUploadMessage(context,
-                                                        'Failed to upload media');
+                                                        'Uploading file...',
+                                                        showLoading: true);
+                                                    final downloadUrl =
+                                                        await uploadData(
+                                                            selectedMedia
+                                                                .storagePath,
+                                                            selectedMedia
+                                                                .bytes);
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .hideCurrentSnackBar();
+                                                    if (downloadUrl != null) {
+                                                      setState(() =>
+                                                          uploadedFileUrl =
+                                                              downloadUrl);
+                                                      showUploadMessage(
+                                                          context, 'Success!');
+                                                    } else {
+                                                      showUploadMessage(context,
+                                                          'Failed to upload media');
+                                                    }
                                                   }
-                                                }
-                                              },
-                                              child: Container(
-                                                width: 60,
-                                                height: 60,
-                                                clipBehavior: Clip.antiAlias,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: CachedNetworkImage(
-                                                  imageUrl: getJsonField(
-                                                      containerGetUserInfoResponse,
-                                                      r'$.photo_url'),
-                                                  fit: BoxFit.fill,
+                                                },
+                                                child: Container(
+                                                  width: 60,
+                                                  height: 60,
+                                                  clipBehavior: Clip.antiAlias,
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                  ),
+                                                  child: CachedNetworkImage(
+                                                    imageUrl: getJsonField(
+                                                        containerGetUserInfoResponse,
+                                                        r'$.photo_url'),
+                                                    fit: BoxFit.scaleDown,
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      )
-                                    ],
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 );
                               },
@@ -280,7 +285,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             ),
                             FutureBuilder<dynamic>(
                               future: getUserCartCall(
-                                name: currentUserDisplayName,
+                                name: columnUsersRecord.displayName,
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
@@ -310,62 +315,31 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           clipBehavior:
                                               Clip.antiAliasWithSaveLayer,
                                           color: Color(0xFFF5F5F5),
-                                          child: Container(
-                                            width: double.infinity,
-                                            height: 50,
-                                            decoration: BoxDecoration(
-                                              color: Color(0xFFEEEEEE),
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsets.fromLTRB(
-                                                  0, 1, 0, 0),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.fromLTRB(
-                                                            10, 0, 0, 0),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Text(
-                                                          getJsonField(
-                                                                  productsItem,
-                                                                  r'$.name')
-                                                              .toString(),
-                                                          style:
-                                                              FlutterFlowTheme
-                                                                  .bodyText1
-                                                                  .override(
-                                                            fontFamily:
-                                                                'Playfair Display',
-                                                            color: Colors.black,
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
+                                          elevation: 0,
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsets.fromLTRB(0, 0, 0, 2),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsets.fromLTRB(
+                                                              10, 5, 0, 5),
+                                                      child: Text(
                                                         getJsonField(
                                                                 productsItem,
-                                                                r'$.weight')
+                                                                r'$.name')
                                                             .toString(),
                                                         style: FlutterFlowTheme
                                                             .bodyText1
@@ -373,24 +347,27 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                           fontFamily:
                                                               'Playfair Display',
                                                         ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Padding(
-                                                        padding:
-                                                            EdgeInsets.fromLTRB(
-                                                                0, 0, 10, 0),
-                                                        child: Text(
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                                Expanded(
+                                                  child: Align(
+                                                    alignment: Alignment(1, 0),
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
                                                           getJsonField(
                                                                   productsItem,
-                                                                  r'$.price')
+                                                                  r'$.weight')
                                                               .toString(),
                                                           style:
                                                               FlutterFlowTheme
@@ -398,14 +375,47 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                   .override(
                                                             fontFamily:
                                                                 'Playfair Display',
-                                                            color: Colors.black,
                                                           ),
-                                                        ),
-                                                      )
-                                                    ],
-                                                  )
-                                                ],
-                                              ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Align(
+                                                    alignment: Alignment(1, 0),
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        Padding(
+                                                          padding: EdgeInsets
+                                                              .fromLTRB(
+                                                                  0, 0, 10, 0),
+                                                          child: Text(
+                                                            getJsonField(
+                                                                    productsItem,
+                                                                    r'$.price')
+                                                                .toString(),
+                                                            style:
+                                                                FlutterFlowTheme
+                                                                    .bodyText1
+                                                                    .override(
+                                                              fontFamily:
+                                                                  'Playfair Display',
+                                                            ),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
                                             ),
                                           ),
                                         );
