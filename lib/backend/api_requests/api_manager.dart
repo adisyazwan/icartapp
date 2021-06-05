@@ -64,7 +64,7 @@ class ApiManager {
       Map<String, dynamic> params,
       bool returnResponse) async {
     final uri = Uri.https(apiDomain, endpoint);
-    final response = await http.put(uri,
+    final response = await http.post(uri,
         headers: toStringMap(headers), body: json.encode(params));
     return returnResponse ? json.decode(response.body) : null;
   }

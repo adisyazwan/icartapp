@@ -284,7 +284,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               ),
                             ),
                             FutureBuilder<dynamic>(
-                              future: getUserCartCall(
+                              future: getUserInfoCall(
                                 name: columnUsersRecord.displayName,
                               ),
                               builder: (context, snapshot) {
@@ -293,12 +293,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   return Center(
                                       child: CircularProgressIndicator());
                                 }
-                                final listViewGetUserCartResponse =
+                                final listViewGetUserInfoResponse =
                                     snapshot.data;
                                 return Builder(
                                   builder: (context) {
                                     final products = (getJsonField(
-                                                listViewGetUserCartResponse,
+                                                listViewGetUserInfoResponse,
                                                 r'$.cart_products') ??
                                             [])
                                         .take(30)
@@ -324,32 +324,36 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.start,
                                               children: [
-                                                Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsets.fromLTRB(
-                                                              10, 5, 0, 5),
-                                                      child: Text(
-                                                        getJsonField(
-                                                                productsItem,
-                                                                r'$.name')
-                                                            .toString(),
-                                                        style: FlutterFlowTheme
-                                                            .bodyText1
-                                                            .override(
-                                                          fontFamily:
-                                                              'Playfair Display',
+                                                Expanded(
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.fromLTRB(
+                                                                10, 5, 0, 5),
+                                                        child: Text(
+                                                          getJsonField(
+                                                                  productsItem,
+                                                                  r'$.name')
+                                                              .toString(),
+                                                          style:
+                                                              FlutterFlowTheme
+                                                                  .subtitle2
+                                                                  .override(
+                                                            fontFamily:
+                                                                'Poppins',
+                                                          ),
                                                         ),
-                                                      ),
-                                                    )
-                                                  ],
+                                                      )
+                                                    ],
+                                                  ),
                                                 ),
                                                 Expanded(
                                                   child: Align(
@@ -371,10 +375,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                               .toString(),
                                                           style:
                                                               FlutterFlowTheme
-                                                                  .bodyText1
+                                                                  .subtitle2
                                                                   .override(
                                                             fontFamily:
-                                                                'Playfair Display',
+                                                                'Poppins',
                                                           ),
                                                         )
                                                       ],
@@ -404,10 +408,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                 .toString(),
                                                             style:
                                                                 FlutterFlowTheme
-                                                                    .bodyText1
+                                                                    .subtitle2
                                                                     .override(
                                                               fontFamily:
-                                                                  'Playfair Display',
+                                                                  'Poppins',
                                                             ),
                                                           ),
                                                         )
