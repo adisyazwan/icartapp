@@ -280,7 +280,15 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                       );
                                       await createUserCartCall(
                                         username: textController.text,
-                                        name: 'products',
+                                        name: 'item0',
+                                        price: 99.99,
+                                        weight: 66.66,
+                                      );
+                                      await createUserCartCall(
+                                        username: textController.text,
+                                        name: 'item00',
+                                        price: 9.90,
+                                        weight: 6.6,
                                       );
                                       await Navigator.pushAndRemoveUntil(
                                         context,

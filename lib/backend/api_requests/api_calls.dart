@@ -79,7 +79,6 @@ Future<dynamic> createUserCall({
       callType: ApiCallType.POST,
       headers: {},
       params: {
-        'nickname': nickname,
         'email': email,
         'photo_url': photoUrl,
         'cart_id': cartId,
@@ -88,8 +87,8 @@ Future<dynamic> createUserCall({
     );
 
 Future<dynamic> createUserCartCall({
-  String username = '',
-  String name = 'name0',
+  String username = 'user0',
+  String name = 'item0',
   double price = 0.0,
   double weight = 0.0,
 }) =>
@@ -105,19 +104,5 @@ Future<dynamic> createUserCartCall({
         'price': price,
         'weight': weight,
       },
-      returnResponse: true,
-    );
-
-Future<dynamic> getUserCartCall({
-  String name = '',
-}) =>
-    ApiManager.instance.makeApiCall(
-      callName: 'Get User Cart',
-      apiDomain:
-          'icartdb-ad2b1-default-rtdb.asia-southeast1.firebasedatabase.app',
-      apiEndpoint: 'users/$name.json',
-      callType: ApiCallType.GET,
-      headers: {},
-      params: {},
       returnResponse: true,
     );
