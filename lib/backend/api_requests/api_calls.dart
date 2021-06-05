@@ -79,6 +79,7 @@ Future<dynamic> createUserCall({
       callType: ApiCallType.POST,
       headers: {},
       params: {
+        'nickname': nickname,
         'email': email,
         'photo_url': photoUrl,
         'cart_id': cartId,
