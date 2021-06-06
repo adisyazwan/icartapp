@@ -47,6 +47,10 @@ dependencies:
   sign_in_with_apple: ^2.5.4
   timeago:
   url_launcher:
+  barcode_scan:
+  qr_flutter:
+  carousel_pro: 
+  photo_view: 
 
 
   # The following adds the Cupertino Icons font to your application.

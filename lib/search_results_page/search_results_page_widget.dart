@@ -1,7 +1,7 @@
-import '../flutter_flow/flutter_flow_theme.dart';
-import '../flutter_flow/flutter_flow_util.dart';
+import 'package:icartapp/home_page/home_page_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'NavBar.dart';
+import 'ImageCarousel.dart';
 
 class SearchResultsPageWidget extends StatefulWidget {
   SearchResultsPageWidget({
@@ -24,51 +24,25 @@ class _SearchResultsPageWidgetState extends State<SearchResultsPageWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.secondaryColor,
-      body: Container(
-        width: double.infinity,
-        height: 145,
-        decoration: BoxDecoration(
-          color: Color(0xFFFF7043),
-        ),
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(10, 40, 10, 0),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  IconButton(
-                    onPressed: () async {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: Colors.white,
-                      size: 24,
-                    ),
-                    iconSize: 24,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(7, 0, 0, 0),
-                    child: Text(
-                      'Search',
-                      style: FlutterFlowTheme.bodyText2.override(
-                        fontFamily: 'Playfair Display',
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )
-                ],
-              )
-            ],
+      drawer: NavBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.amber[700],
+        title: Text('Supermarket Map'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.home_outlined),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        HomePageWidget() /*masukkan class untuk main page, then import class tu sekali dlm ni */),
+              );
+            },
           ),
-        ),
+        ],
       ),
+      body: ImageCarousel(),
     );
   }
 }
