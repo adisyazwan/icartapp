@@ -25,54 +25,43 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: Color(0xFFDBE2E7),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          Navigator.pop(context);
-        },
-        backgroundColor: FlutterFlowTheme.primaryColor,
-        elevation: 8,
-        child: FaIcon(
-          FontAwesomeIcons.dollarSign,
-          color: Colors.white,
-          size: 28,
+      appBar: AppBar(
+        backgroundColor: Color(0xFFFF5722),
+        iconTheme: IconThemeData(color: Colors.white),
+        automaticallyImplyLeading: true,
+        title: Text(
+          'Transactions',
+          style: FlutterFlowTheme.title1.override(
+            fontFamily: 'Playfair Display',
+            color: FlutterFlowTheme.secondaryColor,
+          ),
         ),
+        actions: [
+          Align(
+            alignment: Alignment(0, 0),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
+              child: InkWell(
+                onTap: () async {
+                  await launchURL('stripe.com');
+                },
+                child: FaIcon(
+                  FontAwesomeIcons.dolly,
+                  color: FlutterFlowTheme.secondaryColor,
+                  size: 24,
+                ),
+              ),
+            ),
+          )
+        ],
+        centerTitle: true,
+        elevation: 4,
       ),
+      backgroundColor: Color(0xFFDBE2E7),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 82,
-            decoration: BoxDecoration(
-              color: FlutterFlowTheme.tertiaryColor,
-            ),
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(0, 34, 0, 0),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(16, 0, 0, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text(
-                          'Transaction',
-                          style: FlutterFlowTheme.title1.override(
-                            fontFamily: 'Playfair Display',
-                            fontSize: 28,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
           Expanded(
             child: SingleChildScrollView(
               child: Column(
