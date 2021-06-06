@@ -128,7 +128,7 @@ class _SearchResultsPageWidgetState extends State<SearchResultsPageWidget> {
                                         ),
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Colors.transparent,
+                                            color: Color(0x00000000),
                                             width: 1,
                                           ),
                                           borderRadius: const BorderRadius.only(
@@ -138,7 +138,7 @@ class _SearchResultsPageWidgetState extends State<SearchResultsPageWidget> {
                                         ),
                                         focusedBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
-                                            color: Colors.transparent,
+                                            color: Color(0x00000000),
                                             width: 1,
                                           ),
                                           borderRadius: const BorderRadius.only(

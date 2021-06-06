@@ -4,15 +4,22 @@ import '../backend/backend.dart';
 import '../backend/firebase_storage/storage.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
 import '../login_page/login_page_widget.dart';
 import '../search_results_page/search_results_page_widget.dart';
+import '../transaction_page/transaction_page_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePageWidget extends StatefulWidget {
-  HomePageWidget({Key key}) : super(key: key);
+  HomePageWidget({
+    Key key,
+    this.username,
+  }) : super(key: key);
+
+  final String username;
 
   @override
   _HomePageWidgetState createState() => _HomePageWidgetState();
@@ -233,7 +240,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               enabledBorder:
                                                   UnderlineInputBorder(
                                                 borderSide: BorderSide(
-                                                  color: Colors.transparent,
+                                                  color: Color(0x00000000),
                                                   width: 1,
                                                 ),
                                                 borderRadius:
@@ -246,7 +253,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               focusedBorder:
                                                   UnderlineInputBorder(
                                                 borderSide: BorderSide(
-                                                  color: Colors.transparent,
+                                                  color: Color(0x00000000),
                                                   width: 1,
                                                 ),
                                                 borderRadius:
@@ -274,14 +281,88 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               alignment: Alignment(-1, 0),
                               child: Padding(
                                 padding: EdgeInsets.fromLTRB(10, 20, 0, 5),
-                                child: Text(
-                                  'Added products',
-                                  style: FlutterFlowTheme.subtitle1.override(
-                                    fontFamily: 'Roboto',
-                                    color: Colors.black,
+                                child: InkWell(
+                                  onTap: () async {
+                                    await getUserInfoCall(
+                                      name: columnUsersRecord.displayName,
+                                    );
+                                  },
+                                  child: Text(
+                                    'Added products',
+                                    style: FlutterFlowTheme.subtitle1.override(
+                                      fontFamily: 'Roboto',
+                                      color: Colors.black,
+                                    ),
                                   ),
                                 ),
                               ),
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                FFButtonWidget(
+                                  onPressed: () async {
+                                    Navigator.pop(context);
+                                    await getUserInfoCall(
+                                      name: columnUsersRecord.displayName,
+                                    );
+                                  },
+                                  text: 'Refresh list',
+                                  options: FFButtonOptions(
+                                    width: 130,
+                                    height: 40,
+                                    color: Color(0xFFFF7043),
+                                    textStyle:
+                                        FlutterFlowTheme.subtitle2.override(
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white,
+                                    ),
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                      width: 1,
+                                    ),
+                                    borderRadius: 12,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Align(
+                                    alignment: Alignment(1, 0),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        await Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                TransactionPageWidget(
+                                              username:
+                                                  columnUsersRecord.displayName,
+                                            ),
+                                          ),
+                                          (r) => false,
+                                        );
+                                      },
+                                      text: 'Add list to payment',
+                                      options: FFButtonOptions(
+                                        width: 130,
+                                        height: 40,
+                                        color: Color(0xFFFF7043),
+                                        textStyle:
+                                            FlutterFlowTheme.subtitle1.override(
+                                          fontFamily: 'Playfair Display',
+                                          color: Colors.white,
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1,
+                                        ),
+                                        borderRadius: 12,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
                             FutureBuilder<dynamic>(
                               future: getUserInfoCall(

@@ -21,6 +21,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
   TextEditingController emailTextController;
   TextEditingController textController;
   TextEditingController passwordTextController;
+  bool passwordVisibility;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -29,6 +30,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
     emailTextController = TextEditingController();
     textController = TextEditingController();
     passwordTextController = TextEditingController();
+    passwordVisibility = false;
   }
 
   @override
@@ -102,7 +104,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                           ),
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Colors.transparent,
+                                              color: Color(0x00000000),
                                               width: 1,
                                             ),
                                             borderRadius:
@@ -113,7 +115,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Colors.transparent,
+                                              color: Color(0x00000000),
                                               width: 1,
                                             ),
                                             borderRadius:
@@ -156,7 +158,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                           ),
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Colors.transparent,
+                                              color: Color(0x00000000),
                                               width: 1,
                                             ),
                                             borderRadius:
@@ -167,7 +169,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Colors.transparent,
+                                              color: Color(0x00000000),
                                               width: 1,
                                             ),
                                             borderRadius:
@@ -200,7 +202,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                           EdgeInsets.fromLTRB(20, 0, 20, 0),
                                       child: TextFormField(
                                         controller: passwordTextController,
-                                        obscureText: true,
+                                        obscureText: !passwordVisibility,
                                         decoration: InputDecoration(
                                           hintText: 'Password',
                                           hintStyle: GoogleFonts.getFont(
@@ -210,7 +212,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                           ),
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Colors.transparent,
+                                              color: Color(0x00000000),
                                               width: 1,
                                             ),
                                             borderRadius:
@@ -221,13 +223,26 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Colors.transparent,
+                                              color: Color(0x00000000),
                                               width: 1,
                                             ),
                                             borderRadius:
                                                 const BorderRadius.only(
                                               topLeft: Radius.circular(4.0),
                                               topRight: Radius.circular(4.0),
+                                            ),
+                                          ),
+                                          suffixIcon: InkWell(
+                                            onTap: () => setState(
+                                              () => passwordVisibility =
+                                                  !passwordVisibility,
+                                            ),
+                                            child: Icon(
+                                              passwordVisibility
+                                                  ? Icons.visibility_outlined
+                                                  : Icons
+                                                      .visibility_off_outlined,
+                                              size: 22,
                                             ),
                                           ),
                                         ),
@@ -284,11 +299,10 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                         price: 99.99,
                                         weight: 66.66,
                                       );
-                                      await createUserCartCall(
+                                      await createUserTotalCall(
                                         username: textController.text,
-                                        name: 'item00',
-                                        price: 9.90,
-                                        weight: 6.6,
+                                        totalPrice: 0.00,
+                                        totalWeight: 0.00,
                                       );
                                       await Navigator.pushAndRemoveUntil(
                                         context,

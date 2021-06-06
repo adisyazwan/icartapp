@@ -1,10 +1,18 @@
+import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../main.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TransactionPageWidget extends StatefulWidget {
-  TransactionPageWidget({Key key}) : super(key: key);
+  TransactionPageWidget({
+    Key key,
+    this.username,
+  }) : super(key: key);
+
+  final String username;
 
   @override
   _TransactionPageWidgetState createState() => _TransactionPageWidgetState();
@@ -19,14 +27,14 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
       key: scaffoldKey,
       backgroundColor: Color(0xFFDBE2E7),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          print('FloatingActionButton pressed ...');
+        onPressed: () async {
+          Navigator.pop(context);
         },
         backgroundColor: FlutterFlowTheme.primaryColor,
         elevation: 8,
-        child: Icon(
-          Icons.add,
-          color: FlutterFlowTheme.tertiaryColor,
+        child: FaIcon(
+          FontAwesomeIcons.dollarSign,
+          color: Colors.white,
           size: 28,
         ),
       ),
@@ -51,29 +59,11 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Text(
-                          'Transactions',
+                          'Transaction',
                           style: FlutterFlowTheme.title1.override(
                             fontFamily: 'Playfair Display',
                             fontSize: 28,
                             fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment(0.75, 0),
-                            child: Icon(
-                              Icons.search_rounded,
-                              color: Color(0xFF15212B),
-                              size: 24,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
-                          child: Icon(
-                            Icons.more_vert,
-                            color: Color(0xFF15212B),
-                            size: 24,
                           ),
                         )
                       ],
@@ -88,157 +78,186 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(0, 4, 0, 0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(4, 4, 0, 4),
-                            child: Card(
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              color: Color(0xFFF5F5F5),
-                              elevation: 2,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            'Outgoing',
-                                            style: FlutterFlowTheme.bodyText2
-                                                .override(
-                                              fontFamily: 'Playfair Display',
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ),
-                                        Card(
-                                          clipBehavior:
-                                              Clip.antiAliasWithSaveLayer,
-                                          color: Color(0x734B39EF),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsets.fromLTRB(2, 2, 2, 2),
-                                            child: Text(
-                                              '^ 25%',
-                                              style: TextStyle(
-                                                color: FlutterFlowTheme
-                                                    .primaryColor,
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 10,
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(8, 0, 0, 8),
-                                        child: Text(
-                                          '\$3,205.02',
-                                          style:
-                                              FlutterFlowTheme.title2.override(
-                                            fontFamily: 'Poppins',
-                                            color:
-                                                FlutterFlowTheme.primaryColor,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.fromLTRB(2, 4, 4, 4),
-                            child: Card(
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              color: Color(0xFFF5F5F5),
-                              elevation: 2,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            'Incoming',
-                                            style: FlutterFlowTheme.bodyText2
-                                                .override(
-                                              fontFamily: 'Playfair Display',
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ),
-                                        Card(
-                                          clipBehavior:
-                                              Clip.antiAliasWithSaveLayer,
-                                          color: Color(0x4D3BC821),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsets.fromLTRB(2, 2, 2, 2),
-                                            child: Text(
-                                              '^ 25%',
-                                              style: TextStyle(
-                                                color: Color(0xFF3BC821),
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 10,
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(8, 0, 0, 8),
-                                        child: Text(
-                                          '\$3,205.02',
-                                          style:
-                                              FlutterFlowTheme.title2.override(
-                                            fontFamily: 'Poppins',
-                                            color: Color(0xFF3BC821),
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
+                  FutureBuilder<dynamic>(
+                    future: getUserTotalCall(
+                      username: widget.username,
                     ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                      final rowGetUserTotalResponse = snapshot.data;
+                      return Padding(
+                        padding: EdgeInsets.fromLTRB(0, 4, 0, 0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.fromLTRB(4, 4, 0, 4),
+                                child: Card(
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  color: Color(0xFFF5F5F5),
+                                  elevation: 2,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: InkWell(
+                                    onTap: () async {
+                                      await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => NavBarPage(
+                                              initialPage: 'HomePage'),
+                                        ),
+                                      );
+                                    },
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(8, 8, 8, 8),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Expanded(
+                                                child: Text(
+                                                  'Total weight',
+                                                  style: FlutterFlowTheme
+                                                      .bodyText2
+                                                      .override(
+                                                    fontFamily:
+                                                        'Playfair Display',
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  8, 0, 0, 8),
+                                              child: Text(
+                                                getJsonField(
+                                                        rowGetUserTotalResponse,
+                                                        r'$.totalWeight')
+                                                    .toString(),
+                                                style: FlutterFlowTheme.title2
+                                                    .override(
+                                                  fontFamily: 'Poppins',
+                                                  color: FlutterFlowTheme
+                                                      .primaryColor,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.fromLTRB(2, 4, 4, 4),
+                                child: Card(
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  color: Color(0xFFF5F5F5),
+                                  elevation: 2,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: InkWell(
+                                    onTap: () async {
+                                      await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => NavBarPage(
+                                              initialPage: 'HomePage'),
+                                        ),
+                                      );
+                                    },
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(8, 8, 8, 8),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              Expanded(
+                                                child: Text(
+                                                  'Pay total price',
+                                                  style: FlutterFlowTheme
+                                                      .bodyText2
+                                                      .override(
+                                                    fontFamily:
+                                                        'Playfair Display',
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                              ),
+                                              Card(
+                                                clipBehavior:
+                                                    Clip.antiAliasWithSaveLayer,
+                                                color: Color(0x4D3BC821),
+                                                child: Padding(
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      2, 2, 2, 2),
+                                                  child: Text(
+                                                    '^ 25%',
+                                                    style: TextStyle(
+                                                      color: Color(0xFF3BC821),
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 10,
+                                                    ),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  8, 0, 0, 8),
+                                              child: Text(
+                                                getJsonField(
+                                                        rowGetUserTotalResponse,
+                                                        r'$.totalPrice')
+                                                    .toString(),
+                                                style: FlutterFlowTheme.title2
+                                                    .override(
+                                                  fontFamily: 'Poppins',
+                                                  color: Color(0xFF3BC821),
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      );
+                    },
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.max,
@@ -246,7 +265,7 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(16, 8, 0, 12),
                         child: Text(
-                          'This Month',
+                          'List of Added Products',
                           style: FlutterFlowTheme.bodyText2.override(
                             fontFamily: 'Playfair Display',
                             fontWeight: FontWeight.w500,
@@ -255,400 +274,127 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
                       )
                     ],
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 80,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFEEEEEE),
-                          border: Border.all(
-                            color: Color(0xFFC8CED5),
-                            width: 1,
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 60,
-                                    height: 60,
-                                    clipBehavior: Clip.antiAlias,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Image.asset(
-                                      'assets/images/debit.svg',
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Row(
+                  FutureBuilder<dynamic>(
+                    future: getUserInfoCall(
+                      name: widget.username,
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                      final listViewGetUserInfoResponse = snapshot.data;
+                      return Builder(
+                        builder: (context) {
+                          final products = (getJsonField(
+                                      listViewGetUserInfoResponse,
+                                      r'$.cart_products') ??
+                                  [])
+                              .take(30)
+                              .toList();
+                          return ListView.builder(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemCount: products.length,
+                            itemBuilder: (context, productsIndex) {
+                              final productsItem = products[productsIndex];
+                              return Card(
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                color: Color(0xFFF5F5F5),
+                                elevation: 0,
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 0, 0, 2),
+                                  child: Row(
                                     mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        '-\$360.20',
-                                        style:
-                                            FlutterFlowTheme.subtitle1.override(
-                                          fontFamily: 'Playfair Display',
-                                          color: Color(0xFF15212B),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  10, 5, 0, 5),
+                                              child: Text(
+                                                getJsonField(
+                                                        productsItem, r'$.name')
+                                                    .toString(),
+                                                style: FlutterFlowTheme
+                                                    .subtitle2
+                                                    .override(
+                                                  fontFamily: 'Poppins',
+                                                ),
+                                              ),
+                                            )
+                                          ],
                                         ),
                                       ),
                                       Expanded(
                                         child: Align(
-                                          alignment: Alignment(0.7, 0),
-                                          child: Text(
-                                            '[Time Stamp]',
-                                            textAlign: TextAlign.end,
-                                            style: TextStyle(
-                                              color: Color(0xFF57636C),
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 10,
-                                            ),
+                                          alignment: Alignment(1, 0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                getJsonField(productsItem,
+                                                        r'$.weight')
+                                                    .toString(),
+                                                style: FlutterFlowTheme
+                                                    .subtitle2
+                                                    .override(
+                                                  fontFamily: 'Poppins',
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Align(
+                                          alignment: Alignment(1, 0),
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsets.fromLTRB(
+                                                    0, 0, 10, 0),
+                                                child: Text(
+                                                  getJsonField(productsItem,
+                                                          r'$.price')
+                                                      .toString(),
+                                                  style: FlutterFlowTheme
+                                                      .subtitle2
+                                                      .override(
+                                                    fontFamily: 'Poppins',
+                                                  ),
+                                                ),
+                                              )
+                                            ],
                                           ),
                                         ),
                                       )
                                     ],
                                   ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsets.fromLTRB(0, 4, 4, 0),
-                                          child: Text(
-                                            'My Coffee Shop',
-                                            style: FlutterFlowTheme.bodyText2
-                                                .override(
-                                              fontFamily: 'Playfair Display',
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 80,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFEEEEEE),
-                          border: Border.all(
-                            color: Color(0xFFC8CED5),
-                            width: 1,
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 60,
-                                    height: 60,
-                                    clipBehavior: Clip.antiAlias,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Image.asset(
-                                      'assets/images/credit.svg',
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Text(
-                                        '+\$502.50',
-                                        style:
-                                            FlutterFlowTheme.subtitle1.override(
-                                          fontFamily: 'Playfair Display',
-                                          color: Color(0xFF15212B),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment(0.7, 0),
-                                          child: Text(
-                                            '[Time Stamp]',
-                                            textAlign: TextAlign.end,
-                                            style: TextStyle(
-                                              color: Color(0xFF57636C),
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 10,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsets.fromLTRB(0, 4, 4, 0),
-                                          child: Text(
-                                            'Cedar Coffee & Supply',
-                                            style: FlutterFlowTheme.bodyText2
-                                                .override(
-                                              fontFamily: 'Playfair Display',
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(16, 8, 0, 12),
-                        child: Text(
-                          'April 2021',
-                          style: FlutterFlowTheme.bodyText2.override(
-                            fontFamily: 'Playfair Display',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 80,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFEEEEEE),
-                          border: Border.all(
-                            color: Color(0xFFC8CED5),
-                            width: 1,
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 60,
-                                    height: 60,
-                                    clipBehavior: Clip.antiAlias,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Image.asset(
-                                      'assets/images/debit.svg',
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Text(
-                                        '-\$360.20',
-                                        style:
-                                            FlutterFlowTheme.subtitle1.override(
-                                          fontFamily: 'Playfair Display',
-                                          color: Color(0xFF15212B),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment(0.7, 0),
-                                          child: Text(
-                                            '[Time Stamp]',
-                                            textAlign: TextAlign.end,
-                                            style: TextStyle(
-                                              color: Color(0xFF57636C),
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 10,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsets.fromLTRB(0, 4, 4, 0),
-                                          child: Text(
-                                            'My Coffee Shop',
-                                            style: FlutterFlowTheme.bodyText2
-                                                .override(
-                                              fontFamily: 'Playfair Display',
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 80,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFEEEEEE),
-                          border: Border.all(
-                            color: Color(0xFFC8CED5),
-                            width: 1,
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    width: 60,
-                                    height: 60,
-                                    clipBehavior: Clip.antiAlias,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Image.asset(
-                                      'assets/images/credit.svg',
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Text(
-                                        '+\$502.50',
-                                        style:
-                                            FlutterFlowTheme.subtitle1.override(
-                                          fontFamily: 'Playfair Display',
-                                          color: Color(0xFF15212B),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Align(
-                                          alignment: Alignment(0.7, 0),
-                                          child: Text(
-                                            '[Time Stamp]',
-                                            textAlign: TextAlign.end,
-                                            style: TextStyle(
-                                              color: Color(0xFF57636C),
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 10,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsets.fromLTRB(0, 4, 4, 0),
-                                          child: Text(
-                                            'Cedar Coffee & Supply',
-                                            style: FlutterFlowTheme.bodyText2
-                                                .override(
-                                              fontFamily: 'Playfair Display',
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      );
+                    },
                   )
                 ],
               ),
