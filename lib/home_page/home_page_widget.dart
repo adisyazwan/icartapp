@@ -167,8 +167,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   }
                                                 },
                                                 child: Container(
-                                                  width: 60,
-                                                  height: 60,
+                                                  width: 75,
+                                                  height: 75,
                                                   clipBehavior: Clip.antiAlias,
                                                   decoration: BoxDecoration(
                                                     shape: BoxShape.circle,
@@ -177,7 +177,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     imageUrl: getJsonField(
                                                         containerGetUserInfoResponse,
                                                         r'$.photo_url'),
-                                                    fit: BoxFit.scaleDown,
+                                                    fit: BoxFit.fitHeight,
                                                   ),
                                                 ),
                                               ),
