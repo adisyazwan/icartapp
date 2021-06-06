@@ -141,3 +141,38 @@ Future<dynamic> createUserCall({
       },
       returnResponse: true,
     );
+
+Future<dynamic> updateQRCodeCall({
+  String username = '',
+}) =>
+    ApiManager.instance.makeApiCall(
+      callName: 'Update QR Code',
+      apiDomain:
+          'icartdb-ad2b1-default-rtdb.asia-southeast1.firebasedatabase.app',
+      apiEndpoint: 'users/$username.json',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      returnResponse: true,
+    );
+
+Future<dynamic> updateUserCartCall({
+  String username = '',
+  String name = 'updateName',
+  double price = 66.6,
+  double weight = 99.9,
+}) =>
+    ApiManager.instance.makeApiCall(
+      callName: 'Update User Cart',
+      apiDomain:
+          'icartdb-ad2b1-default-rtdb.asia-southeast1.firebasedatabase.app',
+      apiEndpoint: 'users/$username/cart_products/0.json',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {
+        'name': name,
+        'price': price,
+        'weight': weight,
+      },
+      returnResponse: true,
+    );
