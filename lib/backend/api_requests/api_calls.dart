@@ -79,7 +79,6 @@ Future<dynamic> createUserCall({
       callType: ApiCallType.POST,
       headers: {},
       params: {
-        'nickname': nickname,
         'email': email,
         'photo_url': photoUrl,
         'cart_id': cartId,
@@ -105,5 +104,38 @@ Future<dynamic> createUserCartCall({
         'price': price,
         'weight': weight,
       },
+      returnResponse: true,
+    );
+
+Future<dynamic> createUserTotalCall({
+  String username = '',
+  double totalPrice = 0.00,
+  double totalWeight = 0.00,
+}) =>
+    ApiManager.instance.makeApiCall(
+      callName: 'Create User Total',
+      apiDomain:
+          'icartdb-ad2b1-default-rtdb.asia-southeast1.firebasedatabase.app',
+      apiEndpoint: 'users/$username/total.json',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {
+        'totalPrice': totalPrice,
+        'totalWeight': totalWeight,
+      },
+      returnResponse: true,
+    );
+
+Future<dynamic> getUserTotalCall({
+  String username = '',
+}) =>
+    ApiManager.instance.makeApiCall(
+      callName: 'Get User Total',
+      apiDomain:
+          'icartdb-ad2b1-default-rtdb.asia-southeast1.firebasedatabase.app',
+      apiEndpoint: 'users/$username/total.json',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
       returnResponse: true,
     );
