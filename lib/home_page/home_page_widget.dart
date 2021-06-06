@@ -302,12 +302,25 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               children: [
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    Navigator.pop(context);
+                                    await Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => HomePageWidget(
+                                          username:
+                                              columnUsersRecord.displayName,
+                                        ),
+                                      ),
+                                      (r) => false,
+                                    );
                                     await getUserInfoCall(
                                       name: columnUsersRecord.displayName,
                                     );
                                   },
-                                  text: 'Refresh list',
+                                  text: 'Refresh',
+                                  icon: Icon(
+                                    Icons.refresh_outlined,
+                                    size: 15,
+                                  ),
                                   options: FFButtonOptions(
                                     width: 130,
                                     height: 40,
@@ -316,6 +329,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         FlutterFlowTheme.subtitle2.override(
                                       fontFamily: 'Poppins',
                                       color: Colors.white,
+                                      fontSize: 13,
                                     ),
                                     borderSide: BorderSide(
                                       color: Colors.transparent,
@@ -343,14 +357,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       },
                                       text: 'Add list to payment',
                                       options: FFButtonOptions(
-                                        width: 130,
+                                        width: 200,
                                         height: 40,
                                         color: Color(0xFFFF7043),
                                         textStyle:
                                             FlutterFlowTheme.subtitle1.override(
                                           fontFamily: 'Playfair Display',
                                           color: Colors.white,
-                                          fontSize: 10,
+                                          fontSize: 13,
                                           fontWeight: FontWeight.normal,
                                         ),
                                         borderSide: BorderSide(
@@ -366,7 +380,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             ),
                             FutureBuilder<dynamic>(
                               future: getUserInfoCall(
-                                name: columnUsersRecord.displayName,
+                                name: widget.username,
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
