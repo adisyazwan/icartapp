@@ -292,13 +292,13 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                         photoUrl:
                                             'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
                                         cartId: 0,
+                                        qrScanned: 'new_registration0123546879',
                                       );
                                       await createUserCartCall(
                                         username: textController.text,
                                         name: 'item0',
                                         price: 99.99,
                                         weight: 66.66,
-                                        qrScanned: 'new_registration',
                                       );
                                       await createUserTotalCall(
                                         username: textController.text,

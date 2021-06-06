@@ -230,7 +230,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             controller: textController,
                                             obscureText: false,
                                             decoration: InputDecoration(
-                                              hintText: 'Search items...',
+                                              hintText: 'Search items in map',
                                               hintStyle: FlutterFlowTheme
                                                   .bodyText1
                                                   .override(
@@ -364,8 +364,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             FlutterFlowTheme.subtitle1.override(
                                           fontFamily: 'Playfair Display',
                                           color: Colors.white,
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.normal,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
                                         ),
                                         borderSide: BorderSide(
                                           color: Colors.transparent,
