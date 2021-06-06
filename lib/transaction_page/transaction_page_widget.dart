@@ -205,24 +205,6 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
                                                     fontWeight: FontWeight.w500,
                                                   ),
                                                 ),
-                                              ),
-                                              Card(
-                                                clipBehavior:
-                                                    Clip.antiAliasWithSaveLayer,
-                                                color: Color(0x4D3BC821),
-                                                child: Padding(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      2, 2, 2, 2),
-                                                  child: Text(
-                                                    '^ 25%',
-                                                    style: TextStyle(
-                                                      color: Color(0xFF3BC821),
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 10,
-                                                    ),
-                                                  ),
-                                                ),
                                               )
                                             ],
                                           ),

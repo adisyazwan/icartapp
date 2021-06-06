@@ -79,31 +79,9 @@ Future<dynamic> createUserCall({
       callType: ApiCallType.POST,
       headers: {},
       params: {
-        'nickname': nickname,
         'email': email,
         'photo_url': photoUrl,
         'cart_id': cartId,
-      },
-      returnResponse: true,
-    );
-
-Future<dynamic> createUserCartCall({
-  String username = 'user0',
-  String name = 'item0',
-  double price = 0.0,
-  double weight = 0.0,
-}) =>
-    ApiManager.instance.makeApiCall(
-      callName: 'Create User Cart',
-      apiDomain:
-          'icartdb-ad2b1-default-rtdb.asia-southeast1.firebasedatabase.app',
-      apiEndpoint: 'users/$username/cart_products/0.json',
-      callType: ApiCallType.POST,
-      headers: {},
-      params: {
-        'name': name,
-        'price': price,
-        'weight': weight,
       },
       returnResponse: true,
     );
@@ -138,5 +116,28 @@ Future<dynamic> getUserTotalCall({
       callType: ApiCallType.GET,
       headers: {},
       params: {},
+      returnResponse: true,
+    );
+
+Future<dynamic> createUserCartCall({
+  String username = 'user0',
+  String name = 'item0',
+  double price = 0.0,
+  double weight = 0.0,
+  String qrScanned = 'abc123',
+}) =>
+    ApiManager.instance.makeApiCall(
+      callName: 'Create User Cart',
+      apiDomain:
+          'icartdb-ad2b1-default-rtdb.asia-southeast1.firebasedatabase.app',
+      apiEndpoint: 'users/$username/cart_products/0.json',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {
+        'name': name,
+        'price': price,
+        'weight': weight,
+        'qr_scanned': qrScanned,
+      },
       returnResponse: true,
     );

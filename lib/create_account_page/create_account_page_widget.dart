@@ -4,8 +4,8 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../home_page/home_page_widget.dart';
 import '../login_page/login_page_widget.dart';
-import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -298,6 +298,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                         name: 'item0',
                                         price: 99.99,
                                         weight: 66.66,
+                                        qrScanned: 'new_registration',
                                       );
                                       await createUserTotalCall(
                                         username: textController.text,
@@ -307,8 +308,9 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                       await Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => NavBarPage(
-                                              initialPage: 'HomePage'),
+                                          builder: (context) => HomePageWidget(
+                                            username: textController.text,
+                                          ),
                                         ),
                                         (r) => false,
                                       );
