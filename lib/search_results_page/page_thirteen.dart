@@ -32,7 +32,7 @@ class PageThirteen extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.65,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/map_produce.png"),
+                    image: AssetImage("assets/menubar/map_produce.png"),
                     fit: BoxFit.fitWidth),
               ),
             ),

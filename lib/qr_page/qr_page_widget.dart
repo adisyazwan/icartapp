@@ -1,13 +1,5 @@
-import '../flutter_flow/flutter_flow_theme.dart';
-import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'dart:async';
-import 'dart:io' show Platform;
-
 import 'package:barcode_scan/barcode_scan.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class QrPageWidget extends StatefulWidget {
   QrPageWidget({Key key}) : super(key: key);

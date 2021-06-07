@@ -32,7 +32,7 @@ class PageSeven extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.65,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/map_dairy.png"),
+                    image: AssetImage("assets/menubar/map_dairy.png"),
                     fit: BoxFit.fitWidth),
               ),
             ),

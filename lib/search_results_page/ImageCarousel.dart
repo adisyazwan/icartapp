@@ -30,9 +30,9 @@ class _ImageCarouselState extends State<ImageCarousel>
     Widget carousel = new Carousel(
       boxFit: BoxFit.cover,
       images: [
-        new AssetImage('assets/1.png'),
-        new AssetImage('assets/2.png'),
-        new AssetImage('assets/Supermarket.png'),
+        new AssetImage('assets/menubar/1.png'),
+        new AssetImage('assets/menubar/2.png'),
+        new AssetImage('assets/menubar/Supermarket.png'),
       ],
       animationCurve: Curves.fastOutSlowIn,
       animationDuration: Duration(seconds: 1),

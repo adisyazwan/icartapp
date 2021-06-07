@@ -1,4 +1,10 @@
 import 'api_manager.dart';
+import 'dart:convert';
+import 'dart:io';
+import 'dart:core';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:http/http.dart' as http;
+import 'package:equatable/equatable.dart';
 
 Future<dynamic> getProductsCall() => ApiManager.instance.makeApiCall(
       callName: 'Get Products',
@@ -24,17 +30,28 @@ Future<dynamic> getUsersCall() => ApiManager.instance.makeApiCall(
 
 Future<dynamic> getUserInfoCall({
   String name = '',
-}) =>
-    ApiManager.instance.makeApiCall(
-      callName: 'Get User Info',
-      apiDomain:
-          'icartdb-ad2b1-default-rtdb.asia-southeast1.firebasedatabase.app',
-      apiEndpoint: 'users/$name.json',
-      callType: ApiCallType.GET,
-      headers: {},
-      params: {},
-      returnResponse: true,
-    );
+}) async {
+  Map<String, String> toStringMap(Map<String, dynamic> map) =>
+      map.map((key, value) => MapEntry(key, value.toString()));
+  //callName: 'Get User Info';
+  String apiDomain =
+      'icartdb-ad2b1-default-rtdb.asia-southeast1.firebasedatabase.app';
+  String apiEndpoint = 'users/$name.json';
+  //callType:ApiCallType.GET;
+  Map<String, dynamic> headers = {};
+  Map<String, dynamic> params = {};
+  bool returnResponse = true;
+
+  final uri = Uri.https(apiDomain, apiEndpoint, toStringMap(params));
+  final http.Response response =
+      await http.get(uri, headers: toStringMap(headers));
+
+  if (response.statusCode == 200) {
+    return returnResponse ? json.decode(response.body) : null;
+  } else {
+    throw Exception('Failed to load products');
+  }
+}
 
 Future<dynamic> getProductInfoCall({
   int id,
@@ -159,21 +176,61 @@ Future<dynamic> updateQRCodeCall({
 
 Future<dynamic> updateUserCartCall({
   String username = '',
-  String name = 'updateName',
-  double price = 66.6,
-  double weight = 99.9,
+  double totalPrice = 0.0,
+  double totalWeight = 0.0,
 }) =>
     ApiManager.instance.makeApiCall(
       callName: 'Update User Cart',
       apiDomain:
           'icartdb-ad2b1-default-rtdb.asia-southeast1.firebasedatabase.app',
-      apiEndpoint: 'users/$username/cart_products/0.json',
+      apiEndpoint: 'users/$username/total.json',
       callType: ApiCallType.POST,
       headers: {},
       params: {
-        'name': name,
-        'price': price,
-        'weight': weight,
+        'totalPrice': totalPrice,
+        'totalWeight': totalWeight,
       },
       returnResponse: true,
     );
+
+Future<dynamic> getUserCartCall({
+  String name = '',
+}) async {
+  Map<String, String> toStringMap(Map<String, dynamic> map) =>
+      map.map((key, value) => MapEntry(key, value.toString()));
+  String apiDomain =
+      'icartdb-ad2b1-default-rtdb.asia-southeast1.firebasedatabase.app';
+  String apiEndpoint = 'users/$name/cart_products/0.json';
+  Map<String, dynamic> headers = {};
+  Map<String, dynamic> params = {};
+  bool returnResponse = true;
+
+  final uri = Uri.https(apiDomain, apiEndpoint, toStringMap(params));
+  final http.Response response =
+      await http.get(uri, headers: toStringMap(headers));
+
+  double totalPrice = 0;
+  double totalWeight = 0;
+
+  final items = json.decode(response.body).cast<dynamic>();
+  List<dynamic> productList = items.map<dynamic>((json) {}).toList();
+  productList.forEach((val) {
+    totalPrice += val.price;
+    totalWeight += val.weight;
+  });
+/*
+cartList.forEach((val) { total += val.pSellingPrice; setState(() { total += val.pSellingPrice; }); });
+*/
+
+  updateUserCartCall(
+    username: name,
+    totalPrice: totalPrice,
+    totalWeight: totalWeight,
+  );
+
+  if (response.statusCode == 200) {
+    return returnResponse ? json.decode(response.body) : null;
+  } else {
+    throw Exception('Failed to load products');
+  }
+}

@@ -43,23 +43,17 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       backgroundColor: FlutterFlowTheme.secondaryColor,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
-          await signOut();
-          await Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LoginPageWidget(),
-            ),
-            (r) => false,
-          );
+          setState(() {
+            UsersRecord.getDocument(currentUserReference);
+          });
         },
-        backgroundColor: FlutterFlowTheme.primaryColor,
+        backgroundColor: Color(0xFFFF7043),
         elevation: 8,
+        icon: Icon(Icons.refresh_rounded),
         label: Text(
-          'Logout',
+          'Refresh',
           style: FlutterFlowTheme.bodyText1.override(
-            fontFamily: 'Playfair Display',
-            color: Colors.white,
-          ),
+              fontFamily: 'Poppins', color: Colors.white, fontSize: 13),
         ),
       ),
       body: StreamBuilder<UsersRecord>(
@@ -70,6 +64,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             return Center(child: CircularProgressIndicator());
           }
           final columnUsersRecord = snapshot.data;
+          String username = columnUsersRecord.displayName;
           return SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -319,20 +314,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 FFButtonWidget(
-                                  onPressed: () async {
-                                    await Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => HomePageWidget(
-                                          username:
-                                              columnUsersRecord.displayName,
-                                        ),
-                                      ),
-                                      (r) => false,
-                                    );
-                                    await getUserInfoCall(
-                                      name: columnUsersRecord.displayName,
-                                    );
+                                  onPressed: () {
+                                    setState(() async {
+                                      await getUserInfoCall(
+                                        name: columnUsersRecord.displayName,
+                                      );
+                                    });
                                   },
                                   text: 'Refresh',
                                   icon: Icon(
@@ -361,17 +348,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     alignment: Alignment(1, 0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        await Navigator.pushAndRemoveUntil(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                TransactionPageWidget(
-                                              username:
-                                                  columnUsersRecord.displayName,
-                                            ),
-                                          ),
-                                          (r) => false,
-                                        );
+                                        await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TransactionPageWidget(
+                                                username: username,
+                                              ),
+                                            ));
                                       },
                                       text: 'Add list to payment',
                                       options: FFButtonOptions(
@@ -398,7 +382,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             ),
                             FutureBuilder<dynamic>(
                               future: getUserInfoCall(
-                                name: widget.username,
+                                name: username,
                               ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.

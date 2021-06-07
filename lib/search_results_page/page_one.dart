@@ -32,7 +32,7 @@ class PageOne extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.65,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/map_bakery.png"),
+                    image: AssetImage("assets/menubar/map_bakery.png"),
                     fit: BoxFit.fitWidth),
               ),
             ),

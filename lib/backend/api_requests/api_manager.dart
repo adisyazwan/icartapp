@@ -54,7 +54,12 @@ class ApiManager {
       bool returnResponse) async {
     final uri = Uri.https(apiDomain, endpoint, toStringMap(params));
     final response = await http.get(uri, headers: toStringMap(headers));
-    return returnResponse ? json.decode(response.body) : null;
+
+    if (response.statusCode == 200) {
+      return returnResponse ? json.decode(response.body) : null;
+    } else {
+      throw Exception('Failed to load products');
+    }
   }
 
   static Future<dynamic> postRequest(
@@ -83,12 +88,12 @@ class ApiManager {
     if (_accessToken != null) {
       headers[HttpHeaders.authorizationHeader] = 'Token $_accessToken';
     }
-
+/*
     // If we've already made this exact call before, return the cached result.
     if (_apiCache.containsKey(callRecord)) {
       return _apiCache[callRecord];
     }
-
+*/
     var result;
     switch (callType) {
       case ApiCallType.GET:

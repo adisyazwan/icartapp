@@ -5,7 +5,7 @@ import 'package:icartapp/login_page/login_page_widget.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'home_page/home_page_widget.dart';
 import 'qr_page/qr_page_widget.dart';
-import 'transaction_page/transaction_page_widget.dart';
+import 'search_results_page/search_results_page_widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -76,7 +76,7 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'HomePage': HomePageWidget(),
       'qrPage': QrPageWidget(),
-      'TransactionPage': TransactionPageWidget(),
+      'SearchResultsPage': SearchResultsPageWidget(),
     };
     return Scaffold(
       body: tabs[_currentPage],
@@ -102,11 +102,11 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.monetization_on_outlined,
+              Icons.map_rounded,
               size: 24,
             ),
             activeIcon: Icon(
-              Icons.monetization_on,
+              Icons.map_rounded,
               size: 24,
             ),
             label: 'Home',

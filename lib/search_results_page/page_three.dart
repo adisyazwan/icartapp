@@ -32,7 +32,7 @@ class PageThree extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.65,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/map_beverage.png"),
+                    image: AssetImage("assets/menubar/map_beverage.png"),
                     fit: BoxFit.fitWidth),
               ),
             ),

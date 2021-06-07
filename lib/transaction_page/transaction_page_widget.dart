@@ -1,3 +1,6 @@
+import 'package:icartapp/auth/auth_util.dart';
+import 'package:icartapp/login_page/login_page_widget.dart';
+
 import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -56,6 +59,26 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
         ],
         centerTitle: true,
         elevation: 4,
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () async {
+          await signOut();
+          await Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LoginPageWidget(),
+            ),
+            (r) => false,
+          );
+        },
+        backgroundColor: Color(0xFFFF7043),
+        elevation: 8,
+        icon: Icon(Icons.logout),
+        label: Text(
+          'Logout',
+          style: FlutterFlowTheme.bodyText1.override(
+              fontFamily: 'Poppins', color: Colors.white, fontSize: 13),
+        ),
       ),
       backgroundColor: Color(0xFFDBE2E7),
       body: Column(
@@ -240,6 +263,27 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
                           style: FlutterFlowTheme.bodyText2.override(
                             fontFamily: 'Playfair Display',
                             fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment(1, 1),
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 30, 0),
+                            child: InkWell(
+                              onTap: () async {
+                                getUserCartCall(
+                                  name: widget.username,
+                                );
+                                ;
+                              },
+                              child: Icon(
+                                Icons.refresh,
+                                color: Colors.black,
+                                size: 24,
+                              ),
+                            ),
                           ),
                         ),
                       )
