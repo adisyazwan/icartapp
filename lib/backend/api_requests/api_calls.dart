@@ -161,16 +161,16 @@ Future<dynamic> createUserCall({
     );
 
 Future<dynamic> updateQRCodeCall({
-  String username = '',
+  String qrCode = '',
 }) =>
     ApiManager.instance.makeApiCall(
       callName: 'Update QR Code',
       apiDomain:
           'icartdb-ad2b1-default-rtdb.asia-southeast1.firebasedatabase.app',
-      apiEndpoint: 'users/$username.json',
+      apiEndpoint: 'users/currentQR.json',
       callType: ApiCallType.POST,
       headers: {},
-      params: {},
+      params: {'currentQR': qrCode},
       returnResponse: true,
     );
 
@@ -196,31 +196,24 @@ Future<dynamic> updateUserCartCall({
 Future<dynamic> getUserCartCall({
   String name = '',
 }) async {
-  Map<String, String> toStringMap(Map<String, dynamic> map) =>
-      map.map((key, value) => MapEntry(key, value.toString()));
   String apiDomain =
       'icartdb-ad2b1-default-rtdb.asia-southeast1.firebasedatabase.app';
-  String apiEndpoint = 'users/$name/cart_products/0.json';
-  Map<String, dynamic> headers = {};
-  Map<String, dynamic> params = {};
+  String apiEndpoint = 'users/$name/cart_products.json';
   bool returnResponse = true;
 
-  final uri = Uri.https(apiDomain, apiEndpoint, toStringMap(params));
-  final http.Response response =
-      await http.get(uri, headers: toStringMap(headers));
+  final uri = Uri.https(apiDomain, apiEndpoint);
+  final http.Response response = await http.get(uri);
 
-  double totalPrice = 0;
-  double totalWeight = 0;
+  double totalPrice = 0.0;
+  double totalWeight = 0.0;
 
-  final items = json.decode(response.body).cast<dynamic>();
-  List<dynamic> productList = items.map<dynamic>((json) {}).toList();
-  productList.forEach((val) {
-    totalPrice += val.price;
-    totalWeight += val.weight;
-  });
-/*
-cartList.forEach((val) { total += val.pSellingPrice; setState(() { total += val.pSellingPrice; }); });
-*/
+  final items = (json.decode(response.body) as List);
+  print(items);
+  print(items.length);
+  for (var i = 0; i < items.length; i++) {
+    totalPrice += items[i]['price'];
+    totalWeight += items[i]['weight'];
+  }
 
   updateUserCartCall(
     username: name,

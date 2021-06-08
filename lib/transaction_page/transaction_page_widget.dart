@@ -1,5 +1,6 @@
 import 'package:icartapp/auth/auth_util.dart';
 import 'package:icartapp/login_page/login_page_widget.dart';
+import 'package:icartapp/transaction_page/payment_stripe.dart';
 
 import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -46,7 +47,10 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
               padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
               child: InkWell(
                 onTap: () async {
-                  await launchURL('stripe.com');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => StripePayment()),
+                  );
                 },
                 child: FaIcon(
                   FontAwesomeIcons.dolly,
@@ -62,20 +66,20 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
-          await signOut();
-          await Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LoginPageWidget(),
-            ),
-            (r) => false,
-          );
+          setState(() {
+            getUserCartCall(
+              name: widget.username,
+            );
+            getUserTotalCall(
+              username: widget.username,
+            );
+          });
         },
         backgroundColor: Color(0xFFFF7043),
         elevation: 8,
-        icon: Icon(Icons.logout),
+        icon: Icon(Icons.refresh),
         label: Text(
-          'Logout',
+          'Refresh',
           style: FlutterFlowTheme.bodyText1.override(
               fontFamily: 'Poppins', color: Colors.white, fontSize: 13),
         ),
@@ -266,7 +270,7 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
                           ),
                         ),
                       ),
-                      Expanded(
+                      /*Expanded(
                         child: Align(
                           alignment: Alignment(1, 1),
                           child: Padding(
@@ -286,7 +290,7 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
                             ),
                           ),
                         ),
-                      )
+                      )*/
                     ],
                   ),
                   FutureBuilder<dynamic>(

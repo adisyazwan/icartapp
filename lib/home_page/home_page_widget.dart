@@ -1,3 +1,5 @@
+import 'package:icartapp/qr_page/qr_page_widget.dart';
+
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
@@ -316,25 +318,29 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 FFButtonWidget(
                                   onPressed: () {
                                     setState(() async {
-                                      await getUserInfoCall(
-                                        name: columnUsersRecord.displayName,
-                                      );
+                                      await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => QrPageWidget(
+                                              username: username,
+                                            ),
+                                          ));
                                     });
                                   },
-                                  text: 'Refresh',
+                                  text: 'Scan Cart QR',
                                   icon: Icon(
-                                    Icons.refresh_outlined,
+                                    Icons.qr_code_rounded,
                                     size: 15,
                                   ),
                                   options: FFButtonOptions(
-                                    width: 130,
+                                    width: 160,
                                     height: 40,
                                     color: Color(0xFFFF7043),
                                     textStyle:
                                         FlutterFlowTheme.subtitle2.override(
                                       fontFamily: 'Poppins',
                                       color: Colors.white,
-                                      fontSize: 13,
+                                      fontSize: 16,
                                     ),
                                     borderSide: BorderSide(
                                       color: Colors.transparent,
@@ -348,6 +354,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     alignment: Alignment(1, 0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
+                                        getUserCartCall(
+                                          name: username,
+                                        );
                                         await Navigator.push(
                                             context,
                                             MaterialPageRoute(
