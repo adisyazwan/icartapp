@@ -24,6 +24,7 @@ class TransactionPageWidget extends StatefulWidget {
 
 class _TransactionPageWidgetState extends State<TransactionPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  double totalPrice;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,9 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
                 onTap: () async {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => StripePayment()),
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            StripePayment(totalPrice: totalPrice)),
                   );
                 },
                 child: FaIcon(
@@ -104,6 +107,8 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
                         return Center(child: CircularProgressIndicator());
                       }
                       final rowGetUserTotalResponse = snapshot.data;
+                      totalPrice = getJsonField(
+                          rowGetUserTotalResponse, r'$.totalPrice');
                       return Padding(
                         padding: EdgeInsets.fromLTRB(0, 4, 0, 0),
                         child: Row(
@@ -147,6 +152,7 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
                                                     fontFamily:
                                                         'Playfair Display',
                                                     fontWeight: FontWeight.w500,
+                                                    color: Colors.black,
                                                   ),
                                                 ),
                                               )
@@ -161,18 +167,42 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
                                                   8, 0, 0, 8),
                                               child: Text(
                                                 getJsonField(
-                                                        rowGetUserTotalResponse,
-                                                        r'$.totalWeight')
-                                                    .toString(),
+                                                            rowGetUserTotalResponse,
+                                                            r'$.totalWeight')
+                                                        .toString() +
+                                                    ' kg',
                                                 style: FlutterFlowTheme.title2
                                                     .override(
                                                   fontFamily: 'Poppins',
-                                                  color: FlutterFlowTheme
-                                                      .primaryColor,
+                                                  color: Colors.black,
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                               ),
-                                            )
+                                            ),
+                                            Expanded(
+                                                child: Align(
+                                                    alignment: Alignment(1, 0),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsets.fromLTRB(
+                                                              8, 0, 20, 8),
+                                                      child: Text(
+                                                        'Δ' +
+                                                            checkWeightDiffCall(
+                                                                    username: widget
+                                                                        .username)
+                                                                .toString() +
+                                                            '%',
+                                                        style: FlutterFlowTheme
+                                                            .title2
+                                                            .override(
+                                                          fontFamily: 'Poppins',
+                                                          color: Colors.black,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                      ),
+                                                    )))
                                           ],
                                         )
                                       ],
@@ -232,10 +262,11 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
                                               padding: EdgeInsets.fromLTRB(
                                                   8, 0, 0, 8),
                                               child: Text(
-                                                getJsonField(
-                                                        rowGetUserTotalResponse,
-                                                        r'$.totalPrice')
-                                                    .toString(),
+                                                'RM' +
+                                                    getJsonField(
+                                                            rowGetUserTotalResponse,
+                                                            r'$.totalPrice')
+                                                        .toString(),
                                                 style: FlutterFlowTheme.title2
                                                     .override(
                                                   fontFamily: 'Poppins',
@@ -365,8 +396,9 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
                                             children: [
                                               Text(
                                                 getJsonField(productsItem,
-                                                        r'$.weight')
-                                                    .toString(),
+                                                            r'$.weight')
+                                                        .toString() +
+                                                    'kg',
                                                 style: FlutterFlowTheme
                                                     .subtitle2
                                                     .override(
@@ -391,9 +423,10 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
                                                 padding: EdgeInsets.fromLTRB(
                                                     0, 0, 10, 0),
                                                 child: Text(
-                                                  getJsonField(productsItem,
-                                                          r'$.price')
-                                                      .toString(),
+                                                  'RM' +
+                                                      getJsonField(productsItem,
+                                                              r'$.price')
+                                                          .toString(),
                                                   style: FlutterFlowTheme
                                                       .subtitle2
                                                       .override(

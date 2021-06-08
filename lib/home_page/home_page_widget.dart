@@ -476,9 +476,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                       children: [
                                                         Text(
                                                           getJsonField(
-                                                                  productsItem,
-                                                                  r'$.weight')
-                                                              .toString(),
+                                                                      productsItem,
+                                                                      r'$.weight')
+                                                                  .toString() +
+                                                              ' kg',
                                                           style:
                                                               FlutterFlowTheme
                                                                   .subtitle2
@@ -508,10 +509,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                               .fromLTRB(
                                                                   0, 0, 10, 0),
                                                           child: Text(
-                                                            getJsonField(
-                                                                    productsItem,
-                                                                    r'$.price')
-                                                                .toString(),
+                                                            'RM' +
+                                                                getJsonField(
+                                                                        productsItem,
+                                                                        r'$.price')
+                                                                    .toString(),
                                                             style:
                                                                 FlutterFlowTheme
                                                                     .subtitle2

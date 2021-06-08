@@ -52,6 +52,10 @@ dependencies:
   carousel_pro: 
   photo_view: 
   stripe_sdk:
+  stripe_payment:
+  flutter_credit_card:
+  progress_dialog:
+  
 
 
   # The following adds the Cupertino Icons font to your application.
