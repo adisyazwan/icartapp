@@ -505,24 +505,29 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                               .end,
                                                       children: [
                                                         Padding(
-                                                          padding: EdgeInsets
-                                                              .fromLTRB(
-                                                                  0, 0, 10, 0),
-                                                          child: Text(
-                                                            'RM' +
-                                                                getJsonField(
-                                                                        productsItem,
-                                                                        r'$.price')
-                                                                    .toString(),
-                                                            style:
-                                                                FlutterFlowTheme
+                                                            padding: EdgeInsets
+                                                                .fromLTRB(0, 0,
+                                                                    10, 0),
+                                                            child: InkWell(
+                                                              onTap: () async {
+                                                                await clearUserCartCall(
+                                                                    username:
+                                                                        username);
+                                                              },
+                                                              child: Text(
+                                                                'RM' +
+                                                                    getJsonField(
+                                                                            productsItem,
+                                                                            r'$.price')
+                                                                        .toString(),
+                                                                style: FlutterFlowTheme
                                                                     .subtitle2
                                                                     .override(
-                                                              fontFamily:
-                                                                  'Poppins',
-                                                            ),
-                                                          ),
-                                                        )
+                                                                  fontFamily:
+                                                                      'Poppins',
+                                                                ),
+                                                              ),
+                                                            ))
                                                       ],
                                                     ),
                                                   ),

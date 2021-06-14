@@ -1,12 +1,7 @@
-import 'package:icartapp/flutter_flow/flutter_flow_util.dart';
-
 import 'api_manager.dart';
 import 'dart:convert';
-import 'dart:io';
 import 'dart:core';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
-import 'package:equatable/equatable.dart';
 
 Future<dynamic> getAllItemsCall() async {
   // get all items in i-Cart
@@ -202,9 +197,8 @@ Future<dynamic> updateUserCartTotalCall({
       returnResponse: true,
     );
 
-Future<dynamic> getUserCartCall({
-  String name = '',
-}) async {
+Future<dynamic> getUserCartCall(
+    {String name = '', double price = 0.0, double weight = 0.0}) async {
   String apiDomain =
       'icartdb-ad2b1-default-rtdb.asia-southeast1.firebasedatabase.app';
   String apiEndpoint = 'users/$name/cart_products.json';
@@ -242,56 +236,43 @@ Future<dynamic> getUserCartCall({
 Future<dynamic> updateUserCartProductsCall({
   String username = '',
 }) async {
-  bool returnResponse = true;
   String apiDomain =
       'icartdb-ad2b1-default-rtdb.asia-southeast1.firebasedatabase.app';
 
-  String apiEndpoint = 'users/$username/cart_products.json';
   String apiEndpointCartItems = 'i-Cart.json';
   String apiEndpointAllItems = 'productsAll.json';
-
-  final uri = Uri.https(apiDomain, apiEndpoint);
   final uriCartItems = Uri.https(apiDomain, apiEndpointCartItems);
   final uriAllItems = Uri.https(apiDomain, apiEndpointAllItems);
-
-  final response = await http.get(uri);
   final responseCartItems = await http.get(uriCartItems);
   final responseAllItems = await http.get(uriAllItems);
 
-  final userItems = (json.decode(response.body) as List);
   final allItems = (json.decode(responseAllItems.body) as List);
   final cartItems = (json.decode(responseCartItems.body) as List);
-  var iterationCall = 0;
-  if (cartItems.length == userItems.length) {
-    print('cart length is same with usercart length');
-    return json.decode(response.body);
-  } else {
-    for (var i = 0; i < cartItems.length; i++) {
-      // iterate for total of items in carts
-      if (cartItems[i].toString().contains('Barcode')) {
-        // check if the items has barcode
-        print('checking 1 item from usercart');
-        for (var j = 0; j < allItems.length; j++) {
-          // iterate for all products to find matching barcode
-          if (cartItems[i]['Barcode'] == allItems[j]['barcode']) {
-            // match cart product with all products
-            updateUserCartCall(
-                username: username,
-                iteration: iterationCall,
-                name: allItems[j]['name'],
-                price: allItems[j]['price'],
-                weight: cartItems[i]['Weight']);
-            iterationCall = iterationCall + 1;
-            print('added 1 item in usercart');
-          }
-        }
+  int iterationCall = 0;
+  String outputEndpoint;
+
+  for (int i = 0; i <= cartItems.length; i++) {
+    // iterate for total of items in carts
+    print('checking 1 item from usercart');
+    for (int j = 0; j < 5; j++) {
+      // iterate for all products to find matching barcode
+      if (cartItems[i]['Barcode'] == allItems[j]['barcode']) {
+        outputEndpoint = 'users/$username/cart_products/$iterationCall.json';
+        await http.put(Uri.https(apiDomain, outputEndpoint),
+            body: json.encode({
+              'name': allItems[j]['name'],
+              'price': allItems[j]['price'],
+              'weight': cartItems[i]['Weight']
+            }));
+        iterationCall = iterationCall + 1;
+        print('added 1 item in usercart');
       } else {
-        print("item " + i.toString() + "cannot be found in database");
+        print('no barcode found');
       }
     }
-    return returnResponse ? json.decode(response.body) : null;
   }
 }
+//}
 
 Future<dynamic> getiCartProductsCall() async {
   // get all items in i-Cart
@@ -306,29 +287,8 @@ Future<dynamic> getiCartProductsCall() async {
   return returnResponse ? json.decode(response.body) : null;
 }
 
-Future<dynamic> updateUserCartCall({
-  String username = '',
-  var iteration = 0,
-  String name = '',
-  double price = 0.0,
-  double weight = 0.0,
-}) async {
-  String apiDomain =
-      'icartdb-ad2b1-default-rtdb.asia-southeast1.firebasedatabase.app';
-  String apiEndpoint = 'users/$username/cart_products/$iteration.json';
-  Map<String, dynamic> params = {
-    'name': name,
-    'price': price,
-    'weight': weight
-  };
-  bool returnResponse = true;
-
-  final uri = Uri.https(apiDomain, apiEndpoint);
-  final response = await http.put(uri, body: json.encode(params));
-  return returnResponse ? json.decode(response.body) : null;
-}
-
 Future<dynamic> checkWeightDiffCall({String username: ''}) async {
+  /*
   String apiDomain =
       'icartdb-ad2b1-default-rtdb.asia-southeast1.firebasedatabase.app';
   String apiEndpointProducts = 'products.json';
@@ -360,6 +320,41 @@ Future<dynamic> checkWeightDiffCall({String username: ''}) async {
   }
   print('Calculating weight difference');
   double weightDifference = 100 * userTotalWeight / supposedTotal;
+*/
+  return 0.33;
+}
 
-  return weightDifference;
+Future<dynamic> clearUserCartCall({
+  String username = '',
+  String name = '',
+  double price = 0.0,
+  double weight = 0.0,
+}) async {
+  Map<String, dynamic> params = {
+    'name': 'cart cleared',
+    'price': 0.0,
+    'weight': 0.0,
+    'Barcode': '000'
+  };
+  String apiDomain =
+      'icartdb-ad2b1-default-rtdb.asia-southeast1.firebasedatabase.app';
+
+  String cartLengthApiEndpoint = 'users/$username/cart_products.json';
+  final cartlengthUri = Uri.https(apiDomain, cartLengthApiEndpoint);
+  final cartLengthResponse = await http.get(cartlengthUri);
+  int cartlength = (json.decode(cartLengthResponse.body).length);
+
+  for (int i = 0; i < cartlength; i++) {
+    String cartApiEndpoint = 'users/$username/cart_products/$i.json';
+    String icartApiEndpoint = 'i-Cart/$i.json';
+    final cartUri = Uri.https(apiDomain, cartApiEndpoint);
+    final icartUri = Uri.https(apiDomain, icartApiEndpoint);
+    if (i == 0) {
+      await http.put(cartUri, body: json.encode(params));
+      await http.put(icartUri, body: json.encode(params));
+    } else {
+      await http.delete(cartUri);
+      await http.delete(icartUri);
+    }
+  }
 }

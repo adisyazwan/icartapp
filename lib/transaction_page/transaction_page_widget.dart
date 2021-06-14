@@ -187,12 +187,7 @@ class _TransactionPageWidgetState extends State<TransactionPageWidget> {
                                                           EdgeInsets.fromLTRB(
                                                               8, 0, 20, 8),
                                                       child: Text(
-                                                        'Δ' +
-                                                            checkWeightDiffCall(
-                                                                    username: widget
-                                                                        .username)
-                                                                .toString() +
-                                                            '%',
+                                                        'Δ0.333%',
                                                         style: FlutterFlowTheme
                                                             .title2
                                                             .override(

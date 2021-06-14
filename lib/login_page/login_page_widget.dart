@@ -38,7 +38,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
             Align(
               alignment: Alignment(0, 0),
               child: Image.network(
-                'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/90b0cf78-3356-43b3-a7a2-8e6bf0e85ef1/da3qqvy-c6f1e4ac-1b7f-4039-8801-6a13d3fad4a7.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzkwYjBjZjc4LTMzNTYtNDNiMy1hN2EyLThlNmJmMGU4NWVmMVwvZGEzcXF2eS1jNmYxZTRhYy0xYjdmLTQwMzktODgwMS02YTEzZDNmYWQ0YTcuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.itv7RjkYJwFDdxRKyYsdXUr26CLLokHbPg7L4uWrSFM',
+                'https://hkbonlinestore.files.wordpress.com/2020/09/online-grocery-shopping.jpg',
+                //'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/90b0cf78-3356-43b3-a7a2-8e6bf0e85ef1/da3qqvy-c6f1e4ac-1b7f-4039-8801-6a13d3fad4a7.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzkwYjBjZjc4LTMzNTYtNDNiMy1hN2EyLThlNmJmMGU4NWVmMVwvZGEzcXF2eS1jNmYxZTRhYy0xYjdmLTQwMzktODgwMS02YTEzZDNmYWQ0YTcuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.itv7RjkYJwFDdxRKyYsdXUr26CLLokHbPg7L4uWrSFM',
                 width: double.infinity,
                 height: double.infinity,
                 fit: BoxFit.cover,

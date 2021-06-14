@@ -15,15 +15,15 @@ class ExistingCardsPageState extends State<ExistingCardsPage> {
     {
       'cardNumber': '4242424242424242',
       'expiryDate': '04/24',
-      'cardHolderName': 'Muhammad Ahsan Ayaz',
+      'cardHolderName': 'Muhammad Syazwan',
       'cvvCode': '424',
       'showBackView': false
     },
     {
-      'cardNumber': '5555555566554444',
+      'cardNumber': '2424242424242424',
       'expiryDate': '04/23',
-      'cardHolderName': 'Tracer',
-      'cvvCode': '123',
+      'cardHolderName': 'Nur Dalila',
+      'cvvCode': '242',
       'showBackView': false
     }
   ];
@@ -38,7 +38,7 @@ class ExistingCardsPageState extends State<ExistingCardsPage> {
       expYear: int.parse(expiryArr[1]),
     );
     var response = await StripeService.payViaExistingCard(
-        amount: '2500', currency: 'USD', card: stripeCard);
+        amount: '2500', currency: 'MYR', card: stripeCard);
     await dialog.hide();
     Scaffold.of(context)
         .showSnackBar(SnackBar(

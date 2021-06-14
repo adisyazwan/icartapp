@@ -42,7 +42,8 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
           Align(
             alignment: Alignment(0, -1),
             child: Image.network(
-              'https://www.strategydriven.com/wp-content/uploads/word-image-4.png',
+              'https://www.maritimegateway.com/wp-content/uploads/2020/05/online-grocery.jpg',
+              //'https://www.strategydriven.com/wp-content/uploads/word-image-4.png',
               width: double.infinity,
               height: 215,
               fit: BoxFit.cover,
