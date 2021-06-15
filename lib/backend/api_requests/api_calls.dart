@@ -251,18 +251,19 @@ Future<dynamic> updateUserCartProductsCall({
   int iterationCall = 0;
   String outputEndpoint;
 
-  for (int i = 0; i <= cartItems.length; i++) {
+  for (int i = 1; i <= cartItems.length; i++) {
     // iterate for total of items in carts
     print('checking 1 item from usercart');
-    for (int j = 0; j < 5; j++) {
+    for (int j = 0; j < allItems.length; j++) {
       // iterate for all products to find matching barcode
-      if (cartItems[i]['Barcode'] == allItems[j]['barcode']) {
+      if ((cartItems[i]['Barcode']).toString() ==
+          (allItems[j]['barcode'].toString())) {
         outputEndpoint = 'users/$username/cart_products/$iterationCall.json';
         await http.put(Uri.https(apiDomain, outputEndpoint),
             body: json.encode({
               'name': allItems[j]['name'],
               'price': allItems[j]['price'],
-              'weight': cartItems[i]['Weight']
+              'weight': allItems[j]['weight']
             }));
         iterationCall = iterationCall + 1;
         print('added 1 item in usercart');
@@ -339,12 +340,12 @@ Future<dynamic> clearUserCartCall({
   String apiDomain =
       'icartdb-ad2b1-default-rtdb.asia-southeast1.firebasedatabase.app';
 
-  String cartLengthApiEndpoint = 'users/$username/cart_products.json';
+  String cartLengthApiEndpoint = 'i-Cart.json';
   final cartlengthUri = Uri.https(apiDomain, cartLengthApiEndpoint);
   final cartLengthResponse = await http.get(cartlengthUri);
   int cartlength = (json.decode(cartLengthResponse.body).length);
 
-  for (int i = 0; i < cartlength; i++) {
+  for (int i = 0; i <= cartlength; i++) {
     String cartApiEndpoint = 'users/$username/cart_products/$i.json';
     String icartApiEndpoint = 'i-Cart/$i.json';
     final cartUri = Uri.https(apiDomain, cartApiEndpoint);
